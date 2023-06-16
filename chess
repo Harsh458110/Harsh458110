@@ -1,0 +1,31 @@
+import chess
+import chess.svg
+
+def play_game():
+    board = chess.Board()
+
+    while not board.is_game_over():
+        print(board)
+        print("Current turn: ", board.turn)
+        print("Enter your move (in algebraic notation):")
+        move = input()
+
+        try:
+            board.push_san(move)
+        except ValueError:
+            print("Invalid move! Try again.")
+            continue
+
+        # Check if the move results in a checkmate or stalemate
+        if board.is_checkmate():
+            print("Checkmate!")
+            break
+        elif board.is_stalemate():
+            print("Stalemate!")
+            break
+
+    print(board)
+    print("Game over!")
+
+if __name__ == "__main__":
+    play_game()
